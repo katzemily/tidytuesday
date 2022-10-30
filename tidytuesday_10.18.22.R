@@ -124,110 +124,29 @@ ggplot(summary_long, aes(x = season_episode, y = name_count, color = sum_type)) 
 
 
 
-
-
 # Can't get it work this way.
 scale_colour_manual(values = stranger_colors, limits = force)
 
 
 
-ggplot(summary_long, aes(x = season_episode, y = name_count, color = sum_type)) +
-  geom_point() +
-  geom_line(aes(group = sum_type)) +
-  scale_color_manual(values = c("nancy" = "#5ca3af",
-                                "steve" = "#37526e"))
-
-
-
-# Let's try to plot by season.
-
-ggplot(summary_df) +
-  geom_point(aes(x = season_episode, y = nancy_sum, color = "purple")) +
-  geom_point(aes(x = season_episode, y = steve_sum, color = "green"))
-
-# ^ this works, but need to add lines connecting the dots. Also the colors are completely off.
-
-# Try to connect the dots
-ggplot(summary_df, aes(x = season_episode, y = nancy_sum)) +
-  geom_line(group=1) +
-  geom_point()
-
-# ^ yay! This worked, but we only have nancy's. not sure how to add steve
-
-ggplot(summary_long, aes(x = season_episode, y = name_count, color = sum_type)) +
-  geom_point() +
-  geom_line(aes(group = sum_type)) +
-  labs(title = "Number of times Nancy & Steve's names are said fluctuate by episode.")
-
-# yay! ^ this works!
 
 
 
 
-ggplot(summary_long) +
-  geom_line(aes(x = season_episode, y = name_count, color = sum_type), group = 1)
-
-glimpse(summary_long)
-
-
-ggplot()
-
-glimpse(merged)
-
-merged %>% group_by(season) %>%
-  summarise(nancy_mean = mean(nancy_count), na.rm = TRUE)
-
-# Let's try to plot a nancy_count per episode.
-ggplot(merged, aes(x = season_episode, y = nancy_count)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Nancy's name is said the most in Season 1, Episode 6 and Season 4, Episode 7.")
-
-# Let's plot steve.
-ggplot(merged, aes(x = season_episode, y = steve_count)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Steve's name is said more sporadicly throughout the show.")
-
-# I wonder how we can get both Steve and Nancy's counts on the same chart.
-# Maybe something with a summary stat? Like an average per season?
-
-ggplot(merged, aes(x = season_episode, y = steve_count)) +
-  geom_smooth()
-
-
-# This plot counts the number of lines per episode (which seems kind of irrelevant)
-ggplot(merged,
-       aes(x = season_episode)) +
-  geom_bar()
-
-ggplot(merged,
-       aes(x = season_episode)) +
-  geom_bar()
 
 
 
-# lines <- merged %>% mutate(
-#   season_episode = paste0(season,"_",episode)
-# ) %>%
-#   group_by(season_episode) %>%
-#   summarise(
-#     lines_episode = n()
-#   )
-#
-
-merged %>% group_by(season, episode, written_by) %>%
-  summarise(
-    lines_episode = n()) %>% view()
 
 
 
-ggplot(merged,
-       aes(x = written_by)) +
-  geom_bar()
 
-ggplot(lines,
-       aes(x = season_episode, y = lines_episode)) +
-  geom_line()
-# ^ this gets an error because the data is grouped. I need to do this on the main dataset.
+
+
+
+
+
+
+
 
 
 
