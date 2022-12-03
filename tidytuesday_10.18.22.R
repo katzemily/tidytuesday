@@ -2,11 +2,17 @@
 # First attempt at Tidy Tuesday
 
 # install.packages("tidytuesdayR")
+install.packages("ragg")
+install.packages("systemfonts")
+install.packages("textshaping")
 
 library(tidytuesdayR)
 library(tidyverse)
 library(monochromeR)
 library(ggtext)
+library(ragg)
+library(systemfonts)
+library(textshaping)
 
 # Download this weeks data
 tuesdata <- tidytuesdayR::tt_load(2022, week = 42)
@@ -81,6 +87,18 @@ summary_long <- summary_df %>%
                names_to = "sum_type",
                values_to = "name_count")
 
+ggplot(summary_long, aes(x = season_episode, y = name_count, color = sum_type)) +
+  geom_point() + # Adds the points
+  geom_line(aes(group = sum_type)) +
+  labs(title = "Testing out some fonts",
+       subtitle = "Testing out some other fonts") +
+  theme_minimal() +
+  theme(text = element_text(family = "Cambria"))
+
+system_fonts() %>%
+  transmute(family, style, file = str_extract(path, "[\\w-]+\\.ttf$"))
+
+
 # Make a line graph with one line for Nancy and one for Steve throughout the episodes
 ggplot(summary_long, aes(x = season_episode, y = name_count, color = sum_type)) +
   geom_point() + # Adds the points
@@ -126,10 +144,6 @@ ggplot(summary_long, aes(x = season_episode, y = name_count, color = sum_type)) 
 
 # Can't get it work this way.
 scale_colour_manual(values = stranger_colors, limits = force)
-
-
-
-
 
 
 
