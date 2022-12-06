@@ -27,7 +27,7 @@ subjects <- museums %>%
   group_by(subject) %>%
   summarise(subject_count = n()) %>%
   arrange(desc(subject_count))
-# Okay the 5 most common musuem subjects are:
+# Okay the 5 most common museum subjects are:
 # 1. Local Histories
 # 2. Buildings
 # 3. Wars and conflict
@@ -81,8 +81,8 @@ museum_plot <- ggplot() +
   theme_minimal() +
   labs(title = paste0("Throughout the UK's 4,000+ Museums,<br> <span style=\"color:",
                       museum_colors$Local_Histories, "\">Local Histories</span> is the most common subject."),
-       subtitle = "We've mapped the 5 most common musuem subjects below.",
-       caption = "\nDataviz by @katzemily \nSource: Mapping Musuems project, #TidyTuesday Week 47") +
+       subtitle = "We've mapped the 5 most common museum subjects below.",
+       caption = "\nDataviz by @katzemily \nSource: Mapping Museums project, #TidyTuesday Week 47") +
   theme(axis.text = element_blank(),
         text = element_text(size = 14,
                             family = font,
